@@ -7,6 +7,5 @@ datadir			    = /var/lib/mysql
 pid-file            = /var/run/mysqld/mysqld.pid
 socket			    = /var/run/mysqld/mysqld.sock
 skip_networking 	= off
-
 max_allowed_packet	= 64M
 log_error           = /var/log/mysql/error.log

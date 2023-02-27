@@ -4,6 +4,7 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y wget
 RUN apt-get install -y php7.3 php-fpm php-mysql
+RUN apt-get install -y sendmail
 
 # a command-line interface for WordPress, you can manage WordPress once it's downloaded
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -18,7 +19,7 @@ RUN cd /var/www/html \
 	&& rm /var/www/html/wordpress-6.1.1.tar.gz
 
 # give the rights to root
-RUN chown -R root:root /var/www/html/wordpress
+#RUN chown -R root:root /var/www/html/wordpress/*
 
 # ensure that the web server(nginx) has the necessary permissions to read and execute the files within the web root directory
 RUN chown -R www-data:www-data /var/www/*

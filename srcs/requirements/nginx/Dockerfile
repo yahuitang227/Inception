@@ -17,7 +17,7 @@ RUN mkdir -p /var/run/nginx
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 # give the permission and the ownership to some certain files and users
-RUN chmod 755 /var/www/html
+RUN chmod 755 /var/www/html/*
 RUN chown -R www-data:www-data /var/www/html
 
 # run NGINX server

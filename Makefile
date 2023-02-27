@@ -3,11 +3,10 @@ all:
 	docker-compose -f ./srcs/docker-compose.yml build
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
-info:
-	@docker image ls -a && echo
-	@docker container ls -a && echo
-	@docker network ls && echo
-	@docker volume ls && echo
+logs:
+	docker logs wordpress
+	docker logs mariadb
+	docker logs nginx
 
 clean:
 	docker container stop nginx mariadb wordpress
