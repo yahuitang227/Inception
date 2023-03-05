@@ -2,6 +2,7 @@ version: '3'
 
 services:
   mariadb:
+    image: mariadb
     container_name: mariadb
     build:
       context: ./requirements/mariadb
@@ -13,11 +14,10 @@ services:
     networks:
       - inception
     env_file: .env
-    #healthcheck:
-    #  test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] 
     restart: always
 
   wordpress:
+    image: wordpress
     container_name: wordpress
     build:
       context: ./requirements/wordpress
@@ -31,11 +31,10 @@ services:
     networks:
       - inception
     env_file: .env
-    #healthcheck:
-    #  test: ["CMD-SHELL", "curl -f https://localhost/ || exit 1"] 
     restart: always
 
   nginx:
+    image: nginx
     container_name: nginx
     build:
       context: ./requirements/nginx
@@ -49,7 +48,6 @@ services:
     networks:
       - inception
     env_file: .env
-    #links: [wordpress]
     restart: always
 
 volumes:
@@ -68,3 +66,4 @@ volumes:
 
 networks:
   inception:
+    name: inception

@@ -10,6 +10,7 @@ logs:
 
 clean:
 	docker container stop nginx mariadb wordpress
+	docker network rm inception
 
 fclean: clean
 	@sudo rm -rf /var/www/html/wordpress
