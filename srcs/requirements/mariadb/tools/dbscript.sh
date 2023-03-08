@@ -3,9 +3,6 @@
 
 service mysql start;
 
-#chown mysql:mysql /var/run/mysqld/mysqld.sock;
-#chmod 777 /var/run/mysqld/mysqld.sock;
-
 # log into MariaDB as root and create database and the user
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"

@@ -1,4 +1,6 @@
 all: 
+	mkdir -p /home/yatang/data/mariadb
+	mkdir -p /home/yatang/data/wordpress
 	docker-compose -f ./srcs/docker-compose.yml build
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
@@ -10,13 +12,12 @@ logs:
 clean:
 	docker container stop nginx mariadb wordpress
 	docker network rm inception
+	docker container rm nginx mariadb wordpress
 
 fclean: clean
 	@sudo rm -rf /var/www/html/wordpress
-	@sudo rm -rf /home/yatang/data/mariadb/*
-	@sudo rm -rf /home/yatang/data/wordpress/*
+	@sudo rm -rf /home/yatang/data/mariadb
+	@sudo rm -rf /home/yatang/data/wordpress
 	@docker system prune -af
 
 re: fclean all
-
-.PHONY: all logs clean fclean re

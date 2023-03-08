@@ -25,4 +25,6 @@ EXPOSE 3306
 COPY ./tools/dbscript.sh ./
 RUN chmod +x ./dbscript.sh
 
+COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
+
 ENTRYPOINT ["bash", "./dbscript.sh"]

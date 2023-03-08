@@ -1,25 +1,25 @@
 #!/bin/bash
-sleep 10
+#sleep 10
 #set -eux
 
 cd /var/www/html/wordpress
 
-if ! wp config list; then
+#if ! wp config list; then
 wp config create	--allow-root --dbname=${SQL_DATABASE} \
 			--dbuser=${SQL_USER} \
 			--dbpass=${SQL_PASSWORD} \
 			--dbhost=${SQL_HOST} \
 			--url=https://${DOMAIN_NAME};
-fi		
+#fi		
 
-if ! wp core is-installed; then
+#if ! wp core is-installed; then
 wp core install	--allow-root \
 			--url=https://${DOMAIN_NAME} \
 			--title=${SITE_TITLE} \
 			--admin_user=${ADMIN_USER} \
 			--admin_password=${ADMIN_PASSWORD} \
 			--admin_email=${ADMIN_EMAIL};
-fi
+#fi
 
 wp user create		--allow-root \
 			${USER1_LOGIN} ${USER1_MAIL} \
