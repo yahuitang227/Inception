@@ -13,8 +13,14 @@ services:
       - "3306"
     networks:
       - inception
+    restart: unless-stopped
     env_file: .env
-    restart: always
+    healthcheck:
+      test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
+      interval: 5s
+      timeout: 1s
+      retries: 20
+      start_period: 5s
 
   wordpress:
     image: wordpress
@@ -24,14 +30,15 @@ services:
       dockerfile: Dockerfile
     volumes:
       - wordpress:/var/www/html/wordpress
-    depends_on:
-      - mariadb
     expose:
       - "9000"
     networks:
       - inception
+    restart: unless-stopped
     env_file: .env
-    restart: always
+    depends_on:
+      mariadb:
+        condition: service_healthy    
 
   nginx:
     image: nginx
@@ -47,8 +54,14 @@ services:
       - "443:443"
     networks:
       - inception
+    restart: unless-stopped
     env_file: .env
-    restart: always
+    healthcheck:
+      test: 'curl -kfsSL https://localhost:443/status'
+      interval: 5s
+      timeout: 1s
+      retries: 10
+      start_period: 5s
 
 volumes:
   mariadb:

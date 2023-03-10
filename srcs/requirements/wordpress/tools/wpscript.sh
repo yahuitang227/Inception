@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep 10
+#sleep 10
 #set -eux
 
 cd /var/www/html/wordpress
@@ -22,7 +22,6 @@ wp user create		--allow-root \
 			${USER1_LOGIN} ${USER1_MAIL} \
 			--role=author \
 			--user_pass=${USER1_PASS} ;
-fi
 
 wp cache flush --allow-root
 
@@ -38,6 +37,8 @@ wp plugin delete hello
 
 # set the permalink structure
 wp rewrite structure '/%postname%/'
+
+fi
 
 if [ ! -d /run/php ]; then
 	mkdir /run/php;
