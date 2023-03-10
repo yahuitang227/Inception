@@ -7,7 +7,6 @@ RUN apt-get upgrade -y
 RUN apt-get install -y mariadb-server
 RUN apt-get install -y mariadb-client
 RUN apt-get install -y procps
-RUN apt-get install -y sendmail
 
 
 # copy the provided config file to the container

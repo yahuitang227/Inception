@@ -4,12 +4,11 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y wget
 RUN apt-get install -y php7.3 php-fpm php-mysql
-RUN apt-get install -y sendmail
 
 # a command-line interface for WordPress, you can manage WordPress once it's downloaded
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-RUN chmod +x wp-cli.phar
-RUN mv wp-cli.phar /usr/local/bin/wp
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+	&& chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp
 
 RUN apt-get update && apt-get install -y default-mysql-client
 RUN apt-get install -y mariadb-client

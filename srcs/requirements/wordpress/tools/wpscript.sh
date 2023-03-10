@@ -1,30 +1,28 @@
 #!/bin/bash
-#sleep 10
+sleep 10
 #set -eux
 
 cd /var/www/html/wordpress
 
-#if ! wp config list; then
+if ! wp core is-installed; then
 wp config create	--allow-root --dbname=${SQL_DATABASE} \
 			--dbuser=${SQL_USER} \
 			--dbpass=${SQL_PASSWORD} \
 			--dbhost=${SQL_HOST} \
 			--url=https://${DOMAIN_NAME};
-#fi		
 
-#if ! wp core is-installed; then
 wp core install	--allow-root \
 			--url=https://${DOMAIN_NAME} \
 			--title=${SITE_TITLE} \
 			--admin_user=${ADMIN_USER} \
 			--admin_password=${ADMIN_PASSWORD} \
 			--admin_email=${ADMIN_EMAIL};
-#fi
 
 wp user create		--allow-root \
 			${USER1_LOGIN} ${USER1_MAIL} \
 			--role=author \
-			--user_pass=${USER1_PASS} 
+			--user_pass=${USER1_PASS} ;
+fi
 
 wp cache flush --allow-root
 
@@ -42,7 +40,7 @@ wp plugin delete hello
 wp rewrite structure '/%postname%/'
 
 if [ ! -d /run/php ]; then
-	mkdir /run/php
+	mkdir /run/php;
 fi
 
 # start the PHP FastCGI Process Manager (FPM) for PHP version 7.3 in the foreground
