@@ -2,7 +2,7 @@ all:
 	mkdir -p /home/yatang/data/mariadb
 	mkdir -p /home/yatang/data/wordpress
 	docker-compose -f ./srcs/docker-compose.yml build
-	docker-compose -f ./srcs/docker-compose.yml up -d
+	docker compose -f ./srcs/docker-compose.yml up -d
 
 logs:
 	docker logs wordpress
